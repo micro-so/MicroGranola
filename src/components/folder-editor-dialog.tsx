@@ -1,5 +1,7 @@
 "use client";
 
+import { useDataSource } from "@/lib/data-source";
+
 import { CaretDown, MagnifyingGlass, Plus, Trash, X } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { CreatePropertyDialog } from "@/components/create-property-dialog";
@@ -21,6 +23,7 @@ export function FolderEditorDialog({
   onSave: (properties: FolderProperties) => void;
   onClose: () => void;
 }) {
+  const { workspaceName } = useDataSource();
   const [values, setValues] = useState(properties);
   const [search, setSearch] = useState("");
   const [createOpen, setCreateOpen] = useState(false);
@@ -178,7 +181,7 @@ export function FolderEditorDialog({
                   >
                     {!teamScoped ? <option value="private">Only me</option> : null}
                     <option value="selected">Selected team members</option>
-                    <option value="team">Everyone at Micro team</option>
+                    <option value="team">Everyone at {workspaceName}</option>
                   </SelectField>
                 </EditorField>
               ) : null}

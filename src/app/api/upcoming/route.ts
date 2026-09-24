@@ -8,6 +8,10 @@ export async function GET() {
     return credentialsPayload("Add MICRO_API_KEY and MICRO_TEAM_ID to .env.local to load events.");
   }
 
+  if (!process.env.MICRO_ME_EMAIL?.trim()) {
+    return credentialsPayload("Add MICRO_ME_EMAIL to .env.local to show your calendar.");
+  }
+
   try {
     const result = await queryUpcoming();
     return Response.json({

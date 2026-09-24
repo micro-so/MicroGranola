@@ -1,14 +1,11 @@
 {
   "name": "granola-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "engines": {
-    "node": ">=20"
-  },
   "scripts": {
-    "dev": "next dev --port 3001",
+    "dev": "next dev --hostname 127.0.0.1 --port 3001",
     "build": "next build",
-    "start": "next start --port 3001",
+    "start": "next start --hostname 127.0.0.1 --port 3001",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
   },
@@ -30,5 +27,8 @@
     "eslint-config-next": "16.3.1",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20.9.0"
   }
 }

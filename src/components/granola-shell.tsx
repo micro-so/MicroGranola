@@ -20,6 +20,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { siClaude, siCursor } from "simple-icons/icons";
+import { ConnectAgentDialog } from "@/components/connect-agent-dialog";
 import { Avatar } from "@/components/avatar";
 import { fetchJsonCached, prefetchJson } from "@/lib/client-query-cache";
 import { isMicroViewId } from "@/lib/data";
@@ -140,14 +141,13 @@ function NavRow({
   );
 }
 
-const sources: Array<{ id: DataSource; label: string }> = [
-  { id: "placeholder", label: "Placeholder" },
-  { id: "micro", label: "Micro" },
-];
-
 export function GranolaShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const { source, setSource } = useDataSource();
+  const { source, setSource, workspaceName } = useDataSource();
+  const sources: Array<{ id: DataSource; label: string }> = [
+    { id: "placeholder", label: "Demo data" },
+    { id: "micro", label: workspaceName },
+  ];
   const { profiles: pinnedProfiles } = usePinnedProfiles();
   const { items: spaces, status: spacesStatus } = useSpaces();
   const { items: microLists, status: microListsStatus } = useMicroLists();
@@ -162,12 +162,14 @@ export function GranolaShell({ children }: { children: ReactNode }) {
     "granola-ui:team-expanded",
     "0",
   );
+  const connectButtonRef = useRef<HTMLButtonElement>(null);
+  const [agentDialogOpen, setAgentDialogOpen] = useState(false);
   const [sourceOpen, setSourceOpen] = useState(false);
   const sourceRef = useRef<HTMLDivElement>(null);
   const onHome = pathname === "/";
   const onPeople = pathname.startsWith("/people");
   const onCompanies = pathname.startsWith("/companies");
-  const sourceLabel = sources.find((item) => item.id === source)?.label ?? "Placeholder";
+  const sourceLabel = sources.find((item) => item.id === source)?.label ?? "Demo data";
 
   useEffect(() => {
     if (!sourceOpen) return;
@@ -366,7 +368,7 @@ export function GranolaShell({ children }: { children: ReactNode }) {
                 <CaretRight className="absolute h-3.5 w-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" weight="bold" />
               )}
             </span>
-            <span className="min-w-0 flex-1 truncate pr-2 text-left text-[13px]">Micro team</span>
+            <span className="min-w-0 flex-1 truncate pr-2 text-left text-[13px]">{workspaceName}</span>
           </button>
           {teamExpanded === "1" ? (
             microListsStatus === "loading" && microLists.length === 0 ? (
@@ -420,14 +422,15 @@ export function GranolaShell({ children }: { children: ReactNode }) {
             <p className="mt-1 text-[11.5px] leading-[1.45] text-muted-foreground">
               Give any agent access to your meetings &amp; relationships.
             </p>
-            <a
-              href="https://docs.granola.ai/help-center/sharing/integrations/mcp"
-              target="_blank"
-              rel="noreferrer"
+            <button
+              type="button"
+              ref={connectButtonRef}
+              onClick={() => setAgentDialogOpen(true)}
+              aria-haspopup="dialog"
               className="mt-3 flex h-9 w-full items-center justify-center rounded-full border border-foreground/10 bg-foreground/[0.08] px-3 text-[12.5px] font-medium text-foreground hover:bg-foreground/[0.12]"
             >
               Connect
-            </a>
+            </button>
           </aside>
         ) : null}
 
@@ -484,13 +487,17 @@ export function GranolaShell({ children }: { children: ReactNode }) {
             className="flex h-9 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-hover"
           >
             <MicroMark size={20} />
-            <span className="flex-1 text-[13px] font-medium text-foreground">{sourceLabel}</span>
+            <span title={sourceLabel} className="min-w-0 flex-1 truncate text-[13px] font-medium text-foreground">{sourceLabel}</span>
             <ChevronsUpDown className="h-3.5 w-3.5 text-muted-foreground" strokeWidth={1.75} />
           </button>
         </div>
       </aside>
 
       <main className="flex min-h-0 min-w-0 flex-1 flex-col">{children}</main>
+      {agentDialogOpen ? <ConnectAgentDialog onClose={() => {
+        setAgentDialogOpen(false);
+        requestAnimationFrame(() => connectButtonRef.current?.focus());
+      }} /> : null}
     </div>
   );
 }

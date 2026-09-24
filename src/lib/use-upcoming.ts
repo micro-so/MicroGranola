@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { fetchJsonCached } from "@/lib/client-query-cache";
-import { upcomingEvents, type Note, type UpcomingEvent } from "@/lib/data";
+import { notes, upcomingEvents, type Note, type UpcomingEvent } from "@/lib/data";
 import { useDataSource } from "@/lib/data-source";
 
 type Payload = {
@@ -54,7 +54,7 @@ export function useUpcoming() {
   }, [source]);
 
   if (source === "placeholder") {
-    return { source, status: "ready" as const, items: upcomingEvents, past: [], live: false, message: null };
+    return { source, status: "ready" as const, items: upcomingEvents, past: notes, live: false, message: null };
   }
   if (!result.loaded) {
     return { source, status: "loading" as const, items: [], past: [], live: false, message: null };
