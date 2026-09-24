@@ -4,7 +4,7 @@
 
 A self-hosted interface powered by [Micro](https://micro.so). Bring your own API keys, connect your workspace, and browse your people, companies, and activity in one place.
 
-[Quick start](#quick-start) · [Connect your workspace](#connect-your-workspace) · [Contributing](#contributing) · [MIT license](LICENSE)
+[Quick start](#quick-start) · [Connect your workspace](#connect-your-workspace) · [Contributing](#contributing) · [Changelog](CHANGELOG.md) · [MIT license](LICENSE)
 
 ![Granola UI home page showing upcoming meetings and past meeting notes in dark mode with demo data](docs/images/home.jpg)
 
