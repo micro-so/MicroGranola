@@ -15,6 +15,8 @@ const serif = Source_Serif_4({
   display: "swap",
 });
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Granola",
   description: "People and Companies",
@@ -28,7 +30,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${serif.variable} h-full antialiased`}
     >
       <body className="h-full overflow-hidden font-sans">
-        <Providers>{children}</Providers>
+        <Providers
+          workspaceName={process.env.MICRO_WORKSPACE_NAME?.trim() || "My workspace"}
+          defaultSource={process.env.MICRO_API_KEY && process.env.MICRO_TEAM_ID ? "micro" : "placeholder"}
+        >
+          {children}
+        </Providers>
       </body>
     </html>
   );

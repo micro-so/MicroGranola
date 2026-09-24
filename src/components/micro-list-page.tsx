@@ -1,5 +1,7 @@
 "use client";
 
+import { useDataSource } from "@/lib/data-source";
+
 import {
   Buildings,
   Files as FilesIcon,
@@ -37,6 +39,7 @@ const TAB_LABELS: Record<MicroListTab, string> = {
 };
 
 export function MicroListPage({ listId }: { listId: string }) {
+  const { workspaceName } = useDataSource();
   const { list, items, status, message } = useMicroListRecords(listId);
   const { items: lists } = useMicroLists();
   const [selectedTab, setSelectedTab] = useState<FolderTab | null>(null);
@@ -47,7 +50,7 @@ export function MicroListPage({ listId }: { listId: string }) {
     {
       name: list?.name || "CRM",
       description: list?.description || "Micro CRM",
-      parentFolder: "Micro team",
+      parentFolder: workspaceName,
       subfolders: [],
       sharing: "team",
       folderType: "automatic",
@@ -80,7 +83,7 @@ export function MicroListPage({ listId }: { listId: string }) {
         itemLabel="list"
         editorProperties={folderProperties}
         parentOptions={[
-          "Micro team",
+          workspaceName,
           ...lists.filter((item) => item.id !== listId).map((item) => item.name),
         ]}
         teamScoped

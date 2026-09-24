@@ -7,7 +7,7 @@ import {
 } from "@/lib/granola";
 import { asRefs, asString, getMicroClient, propertiesOf, type PrismRow } from "@/lib/micro";
 
-const CALENDAR_EMAIL = (process.env.MICRO_ME_EMAIL || "brett@micro.so").trim().toLowerCase();
+const CALENDAR_EMAIL = (process.env.MICRO_ME_EMAIL || "").trim().toLowerCase();
 const EVENT_SELECT = [
   "name",
   "start",
