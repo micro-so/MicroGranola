@@ -14,7 +14,7 @@ Read [AGENTS.md](AGENTS.md) before changing application code. This project uses 
 
 ## Report a bug
 
-[Open an issue](https://github.com/micro-so/granola-ui/issues) with steps to reproduce, what you expected, and what happened. Include your Node.js version and whether you used demo or live data. Screenshots help when something looks wrong.
+[Open an issue](https://github.com/micro-so/MicroGranola/issues) with steps to reproduce, what you expected, and what happened. Include your Node.js version and whether you used demo or live data. Screenshots help when something looks wrong.
 
 Keep API keys, `.env.local`, private contacts, notes, and local fixture files out of issues, screenshots, and pull requests. Replace account details with sample values when sharing errors.
 

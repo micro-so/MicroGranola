@@ -1,4 +1,4 @@
-# Granola UI
+# MicroGranola
 
 **Your relationships, notes, and meetings in a Granola-inspired workspace.**
 
@@ -25,8 +25,8 @@ Built with Next.js, React, TypeScript, Tailwind CSS, and the Micro SDK. This is 
 Install Node.js 20.9 or later and npm, then:
 
 ```bash
-git clone https://github.com/micro-so/granola-ui.git
-cd granola-ui
+git clone https://github.com/micro-so/MicroGranola.git
+cd MicroGranola
 npm ci
 cp .env.example .env.local
 npm run dev
