@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1 — 2026-09-24
+
+- Updated Next.js and its ESLint configuration to 16.3.3 to resolve the reported Windows-server and AVIF image security advisories.
+
 ## 0.2.0 — 2026-09-24
 
 - Added a copyable Micro SDK setup prompt under Connect your agent.
