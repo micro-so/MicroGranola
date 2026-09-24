@@ -185,6 +185,7 @@ export function mapEvent(row: PrismRow, options: { solo?: boolean } = {}): Upcom
 }
 
 async function findCalendarOwnerId() {
+  if (!CALENDAR_EMAIL) return "";
   const micro = getMicroClient();
   try {
     const contact = await micro.prism.objects.contacts.find(CALENDAR_EMAIL, { slug: "email" });

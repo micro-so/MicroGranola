@@ -4,7 +4,7 @@
 
 A self-hosted interface powered by [Micro](https://micro.so). Bring your own API keys, connect your workspace, and browse your people, companies, and activity in one place.
 
-[Quick start](#quick-start) · [Connect your workspace](#connect-your-workspace) · [Contributing](#contributing) · [MIT license](https://github.com/micro-so/granola-ui/blob/HEAD/LICENSE)
+[Quick start](#quick-start) · [Connect your workspace](#connect-your-workspace) · [Contributing](#contributing) · [MIT license](LICENSE)
 
 ![Granola UI home page showing upcoming meetings and past meeting notes in dark mode with demo data](docs/images/home.jpg)
 
@@ -59,7 +59,7 @@ Click **Connect** in the sidebar’s **Connect your agent** card, then **Copy pr
 ## Optional connections
 
 - **Granola:** Set `GRANOLA_API_KEY` to your own Granola API key to load its notes and folders. Micro people and companies do not require it.
-- **Custom Micro server:** Set `MICRO_BASE_URL` only if you use a different API endpoint. Otherwise leave it blank.
+- **Custom Micro server:** Production keys use the SDK default, `https://developers.micro.so`. For keys created on staging, set `MICRO_BASE_URL=https://developers.staging.micro.so`.
 - **Local email and iMessage fixtures:** `LOCAL_EMAIL_ACTIVITY_PATH` and `LOCAL_IMESSAGE_ACTIVITY_PATH` point to optional JSON fixture files. The app also checks `.local/email-activity.json` and `.local/imessage-activity.json` when these settings are blank. These are local fixtures, not live inbox connections. A fresh clone contains neither file.
 
 ## What is shared and what stays local
@@ -68,7 +68,7 @@ Each running copy uses one configured workspace and one set of server credential
 
 Live profile edits, deletions, and other supported writes affect the connected workspace. Use a test workspace when experimenting. Demo data is a UI preview, not a security boundary for the app's API routes.
 
-Some UI preferences and folder settings are saved only in the browser. Folder sharing labels do not enforce access permissions. This is a prototype, and not every visible control has a complete backend integration.
+Some UI preferences and folder settings are saved only in the browser. Folder sharing labels do not enforce access permissions. This is a prototype. The Ask bar, recipes, dictate, and attachment controls are visual placeholders without an agent backend.
 
 `.env.local` and `.local/` are ignored by Git. Share the repository, not your local directory with credentials or private fixtures included. When switching accounts on the same browser and address, clear the site's browser storage to reset saved preferences.
 
@@ -77,6 +77,7 @@ Some UI preferences and folder settings are saved only in the browser. Folder sh
 ```bash
 npm run dev     # Local development, http://localhost:3001
 npm run lint    # Lint the source
+npm run typecheck # Check TypeScript
 npm run build   # Production build
 npm start       # Run the production build locally
 ```
@@ -100,4 +101,4 @@ Bug reports and focused pull requests are welcome. See [CONTRIBUTING.md](CONTRIB
 
 ## License
 
-[MIT](https://github.com/micro-so/granola-ui/blob/HEAD/LICENSE). Product names and logos belong to their respective owners.
+[MIT](LICENSE). Product names and logos belong to their respective owners.

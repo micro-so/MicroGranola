@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
+import { missingCredentials } from "@/lib/micro";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
@@ -32,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="h-full overflow-hidden font-sans">
         <Providers
           workspaceName={process.env.MICRO_WORKSPACE_NAME?.trim() || "My workspace"}
-          defaultSource={process.env.MICRO_API_KEY && process.env.MICRO_TEAM_ID ? "micro" : "placeholder"}
+          defaultSource={missingCredentials() ? "placeholder" : "micro"}
         >
           {children}
         </Providers>
